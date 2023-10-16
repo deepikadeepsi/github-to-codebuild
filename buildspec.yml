@@ -1,18 +1,18 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
-      python: 3.7
+      java: corretto11
+  pre_build:
+    commands:
+      - echo "Setting up Java application"
   build:
     commands:
-      - echo Build started on `date`
-      - echo Compiling the Python code...
-      - pip install requests -t .
+      - mvn package
   post_build:
     commands:
-      - echo Build completed on `date`
-      - pwd
-      - ls -al
+      - echo "Java application build completed"
+
 artifacts:
-  files:
-    - '**/*'
+  files: target/my-java-app.jar
